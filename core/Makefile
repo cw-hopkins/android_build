@@ -1614,6 +1614,12 @@ ifneq ($(TARGET_CUSTOM_RELEASETOOL),)
 endif
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(SPIRIT_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(SPIRIT_TARGET_PACKAGE) > $(SPIRIT_TARGET_PACKAGE).md5sum
+ifeq ($(USE_PREBUILT_CHROMIUM),1)
+ifneq ($(PRODUCT_PREBUILT_WEBVIEWCHROMIUM),yes)
+	@echo "Running Chromium prebuilt setup script..."
+	$(hide) . $(TOPDIR)vendor/spirit/utils/chromium_prebuilt.sh $(TOP)
+endif
+endif
 	@echo -e ${CL_CYN}"Package Complete: $(SPIRIT_TARGET_PACKAGE)"${CL_RST}
 
 endif    # recovery_fstab is defined
