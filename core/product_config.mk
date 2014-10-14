@@ -179,19 +179,20 @@ include $(BUILD_SYSTEM)/node_fns.mk
 include $(BUILD_SYSTEM)/product.mk
 include $(BUILD_SYSTEM)/device.mk
 
-ifneq ($(strip $(TARGET_BUILD_APPS)),)
-# An unbundled app build needs only the core product makefiles.
-all_product_configs := $(call get-product-makefiles,\
-    $(SRC_TARGET_DIR)/product/AndroidProducts.mk)
+# A build needs only the product makefiles.
+ifneq ($(SPIRIT_BUILD),)
+  all_product_configs := $(shell ls device/*/$(SPIRIT_BUILD)/spirit.mk)
 else
-  ifneq ($(SPIRIT_BUILD),)
-    all_product_configs := $(shell ls device/*/$(SPIRIT_BUILD)/spirit.mk)
+  ifneq ($(strip $(TARGET_BUILD_APPS)),)
+  # An unbundled app build needs only the core product makefiles.
+  all_product_configs := $(call get-product-makefiles,\
+      $(SRC_TARGET_DIR)/product/AndroidProducts.mk)
   else
     # Read in all of the product definitions specified by the AndroidProducts.mk
     # files in the tree.
     all_product_configs := $(get-all-product-makefiles)
-  endif # SPIRIT_BUILD
-endif
+  endif # TARGET_BUILD_APPS
+endif # SPIRIT_BUILD
 
 ifeq ($(SPIRIT_BUILD),)
 # Find the product config makefile for the current product.
