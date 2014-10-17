@@ -179,9 +179,9 @@ include $(BUILD_SYSTEM)/node_fns.mk
 include $(BUILD_SYSTEM)/product.mk
 include $(BUILD_SYSTEM)/device.mk
 
-# A CM build needs only the CM product makefiles.
-ifneq ($(CM_BUILD),)
-  all_product_configs := $(shell ls device/*/$(CM_BUILD)/cm.mk)
+# A SPIRIT build needs only the SPIRIT product makefiles.
+ifneq ($(SPIRIT_BUILD),)
+  all_product_configs := $(shell ls device/*/$(SPIRIT_BUILD)/spirit.mk)
 else
   ifneq ($(strip $(TARGET_BUILD_APPS)),)
   # An unbundled app build needs only the core product makefiles.
@@ -192,9 +192,9 @@ else
     # files in the tree.
     all_product_configs := $(get-all-product-makefiles)
   endif # TARGET_BUILD_APPS
-endif # CM_BUILD
+endif # SPIRIT_BUILD
 
-ifeq ($(CM_BUILD),)
+ifeq ($(SPIRIT_BUILD),)
 # Find the product config makefile for the current product.
 # all_product_configs consists items like:
 # <product_name>:<path_to_the_product_makefile>
