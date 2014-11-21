@@ -58,14 +58,26 @@ OPT_MEM += -fpredictive-commoning
 endif
 
 $(combo_var_prefix)GLOBAL_CFLAGS := -fno-exceptions -Wno-multichar
-$(combo_var_prefix)RELEASE_CFLAGS := -O2 -g -fno-strict-aliasing
+ifeq ($(TARGET_USE_03),true)
+$(combo_var_prefix)RELEASE_CFLAGS := -O3 -g
+$(combo_var_prefix)GLOBAL_CPPFLAGS :=
+$(combo_var_prefix)GLOBAL_LDFLAGS := -Wl,-O3
+else
+$(combo_var_prefix)RELEASE_CFLAGS := -O2 -g
 $(combo_var_prefix)GLOBAL_CPPFLAGS :=
 $(combo_var_prefix)GLOBAL_LDFLAGS :=
+endif
 $(combo_var_prefix)GLOBAL_ARFLAGS := crsPD
 $(combo_var_prefix)GLOBAL_LD_DIRS :=
 
 ifeq ($(strip $(OPT_MEMORY)),true)
 $(combo_var_prefix)RELEASE_CFLAGS += $(OPT_MEM)
+endif
+
+ifeq ($(strip $(STRICT_ALIASING)),true)
+$(combo_var_prefix)RELEASE_CFLAGS += -fstrict-aliasing -Wstrict-aliasing=3 -Werror=strict-aliasing
+else
+$(combo_var_prefix)RELEASE_CFLAGS += -fno-strict-aliasing
 endif
 
 $(combo_var_prefix)EXECUTABLE_SUFFIX :=
