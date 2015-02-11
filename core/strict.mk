@@ -18,6 +18,7 @@ ifeq ($(STRICT_ALIASING),true)
 LOCAL_DISABLE_STRICT := \
 	libc_bionic \
 	libc_dns \
+	libc_malloc \
 	libc_tzcode \
 	libziparchive \
 	libtwrpmtp \
@@ -52,6 +53,7 @@ LOCAL_DISABLE_STRICT := \
 	libqcomvisualizer \
 	libvisualizer \
 	libstlport \
+	libstlport_static \
 	libutils \
 	libandroidfw \
 	dnsmasq \
@@ -71,7 +73,13 @@ LOCAL_DISABLE_STRICT := \
 	libc_nomalloc \
 	gatt_testtool \
 	libfuse \
-	libqsap_sdk
+	libqsap_sdk \
+	libcrypto_static \
+	audio.primary.smdk4x12 \
+	libbusybox \
+	libssh \
+	ssh \
+	lsof
 
 # Force no strict-aliasing on some modules
 LOCAL_FORCE_DISABLE_STRICT := \
