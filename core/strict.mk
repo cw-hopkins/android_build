@@ -76,6 +76,7 @@ LOCAL_DISABLE_STRICT := \
 	libqsap_sdk \
 	libcrypto_static \
 	audio.primary.smdk4x12 \
+	camera.msm8084 \
 	libbusybox \
 	libssh \
 	ssh \
