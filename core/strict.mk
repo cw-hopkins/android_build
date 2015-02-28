@@ -80,7 +80,13 @@ LOCAL_DISABLE_STRICT := \
 	libbusybox \
 	libssh \
 	ssh \
-	lsof
+	lsof \
+	dex2oat \
+	oatdump \
+	patchoat \
+	libart \
+	libart-compiler \
+	libart-disassembler
 
 # Force no strict-aliasing on some modules
 LOCAL_FORCE_DISABLE_STRICT := \
